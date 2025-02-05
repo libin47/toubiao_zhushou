@@ -16,13 +16,14 @@ class ConfigBase(object):
         self.图片灰度化 = ttk.BooleanVar()  # 仅不删除图片时有效
         self.图片缩放 = ttk.BooleanVar()  # 仅不删除图片时有效
         self.图片最大宽度 = ttk.IntVar()  # 仅在开启图片缩放时生效
+        self.图片嵌入 = ttk.BooleanVar()
         self.标点转中文 = ttk.BooleanVar()  # ＃将英文标点转为中文标点，先于转全角生效
         self.半角转为全角 = ttk.BooleanVar()
         self.删除特殊字符 = ttk.BooleanVar()
         self.删除表格特殊字符 = ttk.BooleanVar()
         self.特殊字符_删除 = ttk.StringVar()
         self.特殊字符_保留 = ttk.StringVar()
-        self.中英文标点字典 = [",.:;<>?\\|[]!$", "，。：；《》？、|【】！￥"]
+        self.中英文标点字典 = [",:;<>?\\|[]!$", "，：；《》？、|【】！￥"]
         self.default()# 英文、数字、英文标点转为全角字符，注：中文字符均为全角没有半角
 
     def default(self):
@@ -33,9 +34,10 @@ class ConfigBase(object):
         self.图片灰度化.set(True)
         self.图片缩放.set(True)
         self.图片最大宽度.set(720)
+        self.图片嵌入.set(True)
         self.标点转中文.set(True)
-        self.半角转为全角.set(True)
-        self.删除特殊字符.set(False)
+        self.半角转为全角.set(False)
+        self.删除特殊字符.set(True)
         self.删除表格特殊字符.set(False)
         self.特殊字符_删除.set("")
         self.特殊字符_保留.set("")
@@ -48,10 +50,74 @@ class ConfigExtend(object):
         self.清除w14样式 = ttk.BooleanVar()
         self.删除自动编号 = ttk.BooleanVar()  # 意味着将会删除所有段落属性
         self.封面目录处理 = ttk.BooleanVar()
+        self.同步office样式 = ttk.BooleanVar()
+        self.设置标题编号 = ttk.BooleanVar()
+        self.删除原有标题编号 = ttk.BooleanVar()
+        self.原有标题编号样式 = ttk.StringVar()
+        self.标题编号ID = ttk.IntVar()
+        self.一级编号 = ttk.StringVar()
+        self.二级编号 = ttk.StringVar()
+        self.三级编号 = ttk.StringVar()
+        self.四级编号 = ttk.StringVar()
+        self.五级编号 = ttk.StringVar()
+        self.六级编号 = ttk.StringVar()
+        self.七级编号 = ttk.StringVar()
+        self.八级编号 = ttk.StringVar()
+        self.九级编号 = ttk.StringVar()
+        self.一级编号Fmt = ttk.StringVar()
+        self.二级编号Fmt = ttk.StringVar()
+        self.三级编号Fmt = ttk.StringVar()
+        self.四级编号Fmt = ttk.StringVar()
+        self.五级编号Fmt = ttk.StringVar()
+        self.六级编号Fmt = ttk.StringVar()
+        self.七级编号Fmt = ttk.StringVar()
+        self.八级编号Fmt = ttk.StringVar()
+        self.九级编号Fmt = ttk.StringVar()
+        self.一级编号Lgl = ttk.BooleanVar()
+        self.二级编号Lgl = ttk.BooleanVar()
+        self.三级编号Lgl = ttk.BooleanVar()
+        self.四级编号Lgl = ttk.BooleanVar()
+        self.五级编号Lgl = ttk.BooleanVar()
+        self.六级编号Lgl = ttk.BooleanVar()
+        self.七级编号Lgl = ttk.BooleanVar()
+        self.八级编号Lgl = ttk.BooleanVar()
+        self.九级编号Lgl = ttk.BooleanVar()
 
         self.清除w14样式.set(True)  # microsoft word2010及更高版本使用w14命名空间提供更多拓展样式，可能会覆盖旧版样式。启用此选项以清除所有新版样式
         self.删除自动编号.set(True)
         self.封面目录处理.set(True)
+        self.同步office样式.set(True)
+        self.设置标题编号.set(True)
+        self.删除原有标题编号.set(True)
+        self.原有标题编号样式.set(r"^\d+(\.\d+)*;^第\d+章;^第\d+节")
+        self.标题编号ID.set(1)
+        self.一级编号.set("第%1章 ")
+        self.二级编号.set("%1.%2 ")
+        self.三级编号.set("%1.%2.%3 ")
+        self.四级编号.set("%1.%2.%3.%4 ")
+        self.五级编号.set("%1.%2.%3.%4.%5 ")
+        self.六级编号.set("%1.%2.%3.%4.%5.%6 ")
+        self.七级编号.set("%1.%2.%3.%4.%5.%6.%7 ")
+        self.八级编号.set("%1.%2.%3.%4.%5.%6.%7.%8 ")
+        self.九级编号.set("%1.%2.%3.%4.%5.%6.%7.%8.%9 ")
+        self.一级编号Fmt.set("一 二 三")
+        self.二级编号Fmt.set("1 2 3")
+        self.三级编号Fmt.set("1 2 3")
+        self.四级编号Fmt.set("1 2 3")
+        self.五级编号Fmt.set("1 2 3")
+        self.六级编号Fmt.set("1 2 3")
+        self.七级编号Fmt.set("1 2 3")
+        self.八级编号Fmt.set("1 2 3")
+        self.九级编号Fmt.set("1 2 3")
+        self.一级编号Lgl.set(False)
+        self.二级编号Lgl.set(True)
+        self.三级编号Lgl.set(True)
+        self.四级编号Lgl.set(True)
+        self.五级编号Lgl.set(True)
+        self.六级编号Lgl.set(True)
+        self.七级编号Lgl.set(True)
+        self.八级编号Lgl.set(True)
+        self.九级编号Lgl.set(True)
 
 class ConfigPageDistance(object):
     """
@@ -85,6 +151,52 @@ class ConfigCore(object):
         self.删除文档属性.set(True)
         self.删除页眉页脚.set(True)
 
+class ConfigFont(object):
+    def __init__(self):
+        self.字体 = ttk.StringVar()
+        self.字号 = ttk.IntVar()
+        self.颜色 = ttk.StringVar()
+        self.高亮 = ttk.BooleanVar()
+        self.字体间距 = ttk.StringVar()
+        self.字符缩放 = ttk.IntVar()
+        self.对齐到网络 = ttk.BooleanVar()
+        self.字体.set("宋体")
+        self.字号.set(14) # 小四=12 四号=14
+        self.颜色.set("黑色")
+        self.高亮.set(False)
+        self.字体间距.set("标准") # 标准2 紧密0 较宽4
+        self.字符缩放.set(100) # 单位为%
+        self.对齐到网络.set(True)
+
+class ConfigParagraph(object):
+    def __init__(self):
+        self.首行缩进 = ttk.IntVar()  # 单位是字符
+        self.行距方式 = ttk.StringVar()  # 倍率 固定
+        self.行距 = ttk.DoubleVar()  # 30
+        self.孤行控制 = ttk.BooleanVar()  # 0
+        self.对齐方式 = ttk.StringVar()  # 居中、左对齐、右对齐
+        self.对齐网络 = ttk.BooleanVar()  # 0
+        self.右对齐网络 = ttk.BooleanVar()  # 0
+
+        self.首行缩进.set(2)
+        self.行距方式.set("倍率")
+        self.行距.set(1.5)
+        self.孤行控制.set(False)
+        self.对齐方式.set("左对齐")
+        self.对齐网络.set(False)
+        self.右对齐网络.set(False)
+
+class ConfigImage(object):
+    def __init__(self):
+        self.首行缩进 = ttk.BooleanVar()
+        self.对齐方式 = ttk.StringVar()
+        self.行距方式 = ttk.StringVar()
+        self.行距 = ttk.DoubleVar()
+        self.首行缩进.set(False)
+        self.对齐方式.set("居中")
+        self.行距方式.set("倍率")
+        self.行距.set(1.5)
+
 
 class ConfigTableBase(object):
     def __init__(self):
@@ -108,46 +220,33 @@ class ConfigTableBase(object):
         self.边框颜色.set("黑色")
         self.边框粗细.set(5)
 
-class ConfigTableParagraph(object):
+
+class ConfigTableParagraph(ConfigParagraph):
     def __init__(self):
-        self.首行缩进 = ttk.IntVar()  # 单位是字符
-        self.行距方式 = ttk.StringVar()  # 倍率 固定
-        self.行距 = ttk.IntVar()  # 30
-        self.孤行控制 = ttk.BooleanVar()  # 0
-        self.对齐方式 = ttk.StringVar()  # 居中、左对齐、右对齐
-        self.对齐网络 = ttk.BooleanVar()  # 0
-        self.右对齐网络 = ttk.BooleanVar()  # 0
+        super().__init__()
         self.首行缩进.set(0)
-        self.行距方式.set("固定")
-        self.行距.set(30)
+        self.行距方式.set("倍率")
+        self.行距.set(1.5)
         self.孤行控制.set(False)
         self.对齐方式.set("居中")
         self.对齐网络.set(False)
         self.右对齐网络.set(False)
 
-class ConfigTableFont(object):
+
+class ConfigTableFont(ConfigFont):
     def __init__(self):
-        self.字体 = ttk.StringVar()
-        self.字号 = ttk.IntVar()
-        self.颜色 = ttk.StringVar()
-        self.高亮 = ttk.BooleanVar()
-        self.字体间距 = ttk.StringVar()
-        self.字符缩放 = ttk.IntVar()
-        self.对齐到网络 = ttk.BooleanVar()
+        super().__init__()
         self.字体.set("宋体")
-        self.字号.set(12) # 小四=12 四号=14
+        self.字号.set(14) # 小四=12 四号=14
         self.颜色.set("黑色")
         self.高亮.set(False)
         self.字体间距.set("标准") # 标准2 紧密0 较宽4
         self.字符缩放.set(100) # 单位为%
         self.对齐到网络.set(True)
 
-class ConfigTableImage(object):
+class ConfigTableImage(ConfigImage):
     def __init__(self):
-        self.首行缩进 = ttk.BooleanVar()
-        self.对齐方式 = ttk.StringVar()
-        self.行距方式 = ttk.StringVar()
-        self.行距 = ttk.IntVar()
+        super().__init__()
         self.首行缩进.set(False)
         self.对齐方式.set("居中")
         self.行距方式.set("倍率")
@@ -163,51 +262,7 @@ class ConfigTable(object):
         self.paragraph = ConfigTableParagraph()
         self.image = ConfigTableImage()
 
-class ConfigFont(object):
-    def __init__(self):
-        self.字体 = ttk.StringVar()
-        self.字号 = ttk.IntVar()
-        self.颜色 = ttk.StringVar()
-        self.高亮 = ttk.BooleanVar()
-        self.字体间距 = ttk.StringVar()
-        self.字符缩放 = ttk.IntVar()
-        self.对齐到网络 = ttk.BooleanVar()
-        self.字体.set("宋体")
-        self.字号.set(12) # 小四=12 四号=14
-        self.颜色.set("黑色")
-        self.高亮.set(False)
-        self.字体间距.set("标准") # 标准2 紧密0 较宽4
-        self.字符缩放.set(100) # 单位为%
-        self.对齐到网络.set(True)
 
-class ConfigParagraph(object):
-    def __init__(self):
-        self.首行缩进 = ttk.IntVar()  # 单位是字符
-        self.行距方式 = ttk.StringVar()  # 倍率 固定
-        self.行距 = ttk.IntVar()  # 30
-        self.孤行控制 = ttk.BooleanVar()  # 0
-        self.对齐方式 = ttk.StringVar()  # 居中、左对齐、右对齐
-        self.对齐网络 = ttk.BooleanVar()  # 0
-        self.右对齐网络 = ttk.BooleanVar()  # 0
-
-        self.首行缩进.set(2)
-        self.行距方式.set("固定")
-        self.行距.set(30)
-        self.孤行控制.set(False)
-        self.对齐方式.set("左对齐")
-        self.对齐网络.set(True)
-        self.右对齐网络.set(False)
-
-class ConfigImage(object):
-    def __init__(self):
-        self.首行缩进 = ttk.BooleanVar()
-        self.对齐方式 = ttk.StringVar()
-        self.行距方式 = ttk.StringVar()
-        self.行距 = ttk.IntVar()
-        self.首行缩进.set(False)
-        self.对齐方式.set("居中")
-        self.行距方式.set("倍率")
-        self.行距.set(1.5)
 
 class ConfigMain(object):
     """

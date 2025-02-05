@@ -97,7 +97,7 @@ class Application(ttk.Frame):
             Messagebox.show_error( "未选择文件路径！", "警告")
 
     def _about(self):
-        Messagebox.show_info("版本：V0.1.20250106", "关于本软件") # TODO: 图表
+        Messagebox.show_info("版本：V0.3.0.20250121", "关于本软件") # TODO: 图表
 
 
 if __name__ == '__main__':

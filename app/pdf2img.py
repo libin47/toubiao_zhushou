@@ -1,12 +1,10 @@
-import os.path
-# import tkinter as tk
+
 import tkinter.filedialog as tkf
 from ttkbootstrap.tooltip import ToolTip
-import time
-from ttkbootstrap.constants import *
+# from ttkbootstrap.constants import *
 from ttkbootstrap.dialogs.dialogs import Messagebox
+from ttkbootstrap.constants import DISABLED, NORMAL, RIGHT, LEFT, INFO, SUCCESS, WARNING, DANGER
 import ttkbootstrap as ttk
-import threading as mt
 from app.pdf2img_config import Pdf2imgConfig
 from app.pdf2img_fun import pdf2image
 
