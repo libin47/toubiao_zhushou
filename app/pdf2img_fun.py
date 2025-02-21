@@ -67,11 +67,3 @@ def pdf2image(config, process, tip):
     tip.set("完成！")
     return True
 
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    config = json.load(open("config.json", "r", encoding="utf-8"))
-    pdf2image(config["input_dir"], config["output_dir"])
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/

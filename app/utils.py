@@ -1,4 +1,14 @@
 import ttkbootstrap as ttk
+from ttkbootstrap.tooltip import ToolTip
+
+
+def tooltip(widget, text):
+    """
+    给组件添加提示
+    """
+    ToolTip(widget, text=text)
+    return widget
+
 
 def convert_to_json(obj):
     if isinstance(obj, ttk.StringVar):

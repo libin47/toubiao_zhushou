@@ -3,6 +3,7 @@
 import ttkbootstrap as ttk
 from app.hidden_clean import HiddenCleaner
 from app.pdf2img import Pdf2img
+from app.compare import Compare
 import tkinter.filedialog as tkf
 import json
 from ttkbootstrap.dialogs.dialogs import Messagebox
@@ -59,15 +60,16 @@ class Application(ttk.Frame):
         self.notebook.pack(fill=ttk.BOTH, expand=True)
         self.HiddenCleaner = HiddenCleaner(self.notebook)
         self.notebook.add(self.HiddenCleaner, text="暗标格式刷")
-        self.notebook.add(self._create_clone_tab(), text="标书查重")
+        self.Compare = Compare(self.notebook)
+        self.notebook.add(self.Compare, text="标书查重")
         self.Pdf2Img = Pdf2img(self.notebook)
         self.notebook.add(self.Pdf2Img, text="pdf转图片")
 
 
 
-    def _create_clone_tab(self):
-        config_tab = ttk.Frame(self.notebook)
-        return config_tab
+    # def _create_clone_tab(self):
+    #     config_tab = ttk.Frame(self.notebook)
+    #     return config_tab
 
     def _create_pad2img_tab(self):
         pad2img_tab = ttk.Frame(self.notebook)

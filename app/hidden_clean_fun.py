@@ -586,7 +586,7 @@ def set_numbering(doc, config:HiddenCleanerConfig):
             else:
                 # 如果没有的话，创建新的
                 # TODO:考虑的似乎过于简单
-                # 1、船舰numid和abstracNumId的映射
+                # 1、创建numid和abstracNumId的映射
                 abstractId = get_abstract_num(abstractIds)
                 abstract_xml = OxmlElement('w:abstractNumId')
                 abstract_xml.set(qn('w:val'), abstractId)

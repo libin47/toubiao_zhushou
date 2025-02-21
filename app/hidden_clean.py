@@ -1,26 +1,15 @@
-import os.path
-# import tkinter as tk
+
 import tkinter.filedialog as tkf
-# from tktooltip import ToolTip
-import time
 from ttkbootstrap.dialogs.dialogs import Messagebox
-# from ttkbootstrap.constants import *
 from ttkbootstrap.constants import DISABLED, NORMAL, RIGHT, LEFT, INFO, SUCCESS, WARNING, DANGER
 import ttkbootstrap as ttk
-from ttkbootstrap.tooltip import ToolTip
 from app.hidden_clean_fun import set_docx
 from app.hidden_clean_config import HiddenCleanerConfig
-
+from app.utils import tooltip
 
 
 fmt_list = ("一 二 三", "1 2 3", "１　２　３", "壹 贰 叁", "① ② ③", "Ⅰ Ⅱ Ⅲ", "甲 乙 丙", "A B C")
 
-def tooltip(widget, text):
-    """
-    给组件添加提示
-    """
-    ToolTip(widget, text=text)
-    return widget
 
 
 class HiddenCleaner(ttk.Frame):

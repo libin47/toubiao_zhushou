@@ -1,6 +1,6 @@
 
 import tkinter.filedialog as tkf
-from ttkbootstrap.tooltip import ToolTip
+from app.utils import tooltip
 # from ttkbootstrap.constants import *
 from ttkbootstrap.dialogs.dialogs import Messagebox
 from ttkbootstrap.constants import DISABLED, NORMAL, RIGHT, LEFT, INFO, SUCCESS, WARNING, DANGER
@@ -8,12 +8,7 @@ import ttkbootstrap as ttk
 from app.pdf2img_config import Pdf2imgConfig
 from app.pdf2img_fun import pdf2image
 
-def tooltip(widget, text):
-    """
-    给组件添加提示
-    """
-    ToolTip(widget, text=text)
-    return widget
+
 
 
 class Pdf2img(ttk.Frame):

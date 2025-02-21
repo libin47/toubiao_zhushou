@@ -1,6 +1,12 @@
 # 简介
 这是一个使用Python和Tkinter库编写的投标辅助工具。    
-目前功能包括暗标格式刷、pdf转图片，正在加入多标书查重、招标要求与投标相应批量比对的功能。    
+目前功能包括
+- 暗标格式刷
+- pdf转图片
+
+计划加入：
+- 多标书查重
+- 招标要求与投标响应批量比对    
 # 使用方法
 仅支持Windows且需win10以上系统。
 在[此处](https://github.com/libin47/toubiao_zhushou/releases)下载最新的zip文件，解压后运行其中的main.exe。
