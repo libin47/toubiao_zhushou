@@ -412,101 +412,133 @@ def set_style(style, config:HiddenCleanerConfig):
     cfg_font = config.main.font
     cfg_paragraph = config.main.paragraph
     # 编号
-    if config.extend.设置标题编号.get():
-        if style.element.pPr is not None and style.element.pPr.find(qn("w:numPr")):
-            numPr = style.element.pPr.find(qn("w:numPr"))
-            # 设置numID
-            numId = numPr.find(qn("w:numId"))
-            numId.set(qn("w:val"), str(config.extend.标题编号ID.get()))
-            # 设置ilvl与大纲级别一致
-            outlineLv = style.element.pPr.find(qn("w:outlineLvl"))
-            lvl = outlineLv.get(qn("w:val"))
-            ilvl = numPr.find(qn("w:ilvl"))
-            ilvl.set(qn("w:val"), lvl)
+    try:
+        if config.extend.设置标题编号.get():
+            if style.element.pPr is not None and style.element.pPr.find(qn("w:numPr")):
+                try:
+                    numPr = style.element.pPr.find(qn("w:numPr"))
+                    # 设置numID
+                    numId = numPr.find(qn("w:numId"))
+                    numId.set(qn("w:val"), str(config.extend.标题编号ID.get()))
+                    # 设置ilvl与大纲级别一致
+                    outlineLv = style.element.pPr.find(qn("w:outlineLvl"))
+                    lvl = outlineLv.get(qn("w:val"))
+                    ilvl = numPr.find(qn("w:ilvl"))
+                    ilvl.set(qn("w:val"), lvl)
+                except:
+                    pass
+    except:
+        pass
     # 字体
-    fontname = cfg_font.字体.get()
-    style.font.name = fontname
-    style._element.rPr.rFonts.set(qn('w:ascii'), fontname)
-    style._element.rPr.rFonts.set(qn('w:hAnsi'), fontname)
-    style._element.rPr.rFonts.set(qn('w:eastAsia'), fontname)
-    style.font.size = Pt(cfg_font.字号.get())
+    try:
+        fontname = cfg_font.字体.get()
+        # TODO:可能会报错，原因未知
+        style.font.name = fontname
+        style._element.rPr.rFonts.set(qn('w:ascii'), fontname)
+        style._element.rPr.rFonts.set(qn('w:hAnsi'), fontname)
+        style._element.rPr.rFonts.set(qn('w:eastAsia'), fontname)
+        style.font.size = Pt(cfg_font.字号.get())
+    except:
+        pass
     # 颜色
-    if cfg_font.颜色.get() == "黑色":
-        style.font.color.rgb = RGBColor(0, 0, 0)
-    elif cfg_font.颜色.get() == "红色":
-        style.font.color.rgb = RGBColor(255, 0, 0)
+    try:
+        if cfg_font.颜色.get() == "黑色":
+            style.font.color.rgb = RGBColor(0, 0, 0)
+        elif cfg_font.颜色.get() == "红色":
+            style.font.color.rgb = RGBColor(255, 0, 0)
+    except:
+        pass
     # 对齐到网络
-    style.font.snap_to_grid = True if cfg_font.对齐到网络.get() else False
+    try:
+        style.font.snap_to_grid = True if cfg_font.对齐到网络.get() else False
+    except:
+        pass
     # 其他
-    style.font.italic = False  # 斜体
-    style.font.bold = False  # 加粗
-    style.font.underline = False  # 下划线
-    style.font.all_caps = False  # 全大写
-    style.font.double_strike = False  # 双删除线
-    style.font.strike = False  # 删除线
-    style.font.subscript = False  # 下标
-    style.font.superscript = False  # 上标
-    style.font.outline = False  # 描边
-    style.font.shadow = False  # 阴影
-    style.font.small_caps = False  # 小大写
-    style.font.emboss = False  # 浮雕
-    style.font.complex_script = False  # 复杂语种
-    style.font.cs_bold = False
-    style.font.cs_italic = False
-    if cfg_font.高亮.get():
-        style.font.highlight_color = RGBColor(255, 255, 0)  # 设置高亮颜色为黄色
-    else:
-        style.font.highlight_color = None
-    if type(style) == CharacterStyle:
-        return
+    try:
+        style.font.italic = False  # 斜体
+        style.font.bold = False  # 加粗
+        style.font.underline = False  # 下划线
+        style.font.all_caps = False  # 全大写
+        style.font.double_strike = False  # 双删除线
+        style.font.strike = False  # 删除线
+        style.font.subscript = False  # 下标
+        style.font.superscript = False  # 上标
+        style.font.outline = False  # 描边
+        style.font.shadow = False  # 阴影
+        style.font.small_caps = False  # 小大写
+        style.font.emboss = False  # 浮雕
+        style.font.complex_script = False  # 复杂语种
+        style.font.cs_bold = False
+        style.font.cs_italic = False
+        if cfg_font.高亮.get():
+            style.font.highlight_color = RGBColor(255, 255, 0)  # 设置高亮颜色为黄色
+        else:
+            style.font.highlight_color = None
+        if type(style) == CharacterStyle:
+            return
+    except:
+        pass
     # 段落
     # 首行缩进2字符
-    style.paragraph_format.first_line_indent = 0
-    style.paragraph_format.element.pPr.ind.set(qn("w:firstLineChars"), str(int(cfg_paragraph.首行缩进.get())*100))
+    try:
+        style.paragraph_format.first_line_indent = 0
+        style.paragraph_format.element.pPr.ind.set(qn("w:firstLineChars"), str(int(cfg_paragraph.首行缩进.get())*100))
+    except:
+        pass
     # 对齐方式
-    if cfg_paragraph.对齐方式.get() =="左对齐":
-        style.paragraph_format.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT  # 对齐方向
-    elif cfg_paragraph.对齐方式.get()=="右对齐":
-        style.paragraph_format.alignment = WD_PARAGRAPH_ALIGNMENT.RIGHT  # 对齐方向
-    elif cfg_paragraph.对齐方式.get()=="居中":
-        style.paragraph_format.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER  # 对齐方向
+    try:
+        if cfg_paragraph.对齐方式.get() =="左对齐":
+            style.paragraph_format.alignment = WD_PARAGRAPH_ALIGNMENT.LEFT  # 对齐方向
+        elif cfg_paragraph.对齐方式.get()=="右对齐":
+            style.paragraph_format.alignment = WD_PARAGRAPH_ALIGNMENT.RIGHT  # 对齐方向
+        elif cfg_paragraph.对齐方式.get()=="居中":
+            style.paragraph_format.alignment = WD_PARAGRAPH_ALIGNMENT.CENTER  # 对齐方向
+    except:
+        pass
     # 行距
-    行距方式 = cfg_paragraph.行距方式.get()
-    行距 = cfg_paragraph.行距.get()
-    # 对齐到网络
-    add_xml(style.paragraph_format.element.pPr, 'w:snapToGrid', str(cfg_paragraph.对齐网络.get()))
-    # 右对齐网络
-    add_xml(style.paragraph_format.element.pPr, 'w:adjustRightInd', str(cfg_paragraph.右对齐网络.get()))
-    # 行距/行高
-    if 行距方式 == "倍率":
-        if 行距 == 1.5:
-            style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.ONE_POINT_FIVE
-        elif 行距 == 2:
-            style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.DOUBLE
-        elif 行距 == 1:
-            style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.AT_LEAST
-        elif 行距 == 0:
-            style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
-        else:
-            style.paragraph_format.line_spacing = 行距
-            style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.MULTIPLE
-    elif 行距方式 == "固定":
-        style.paragraph_format.line_spacing = Pt(行距)
-        style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
-    # 孤行控制
-    style.paragraph_format.widow_control = True if cfg_paragraph.孤行控制.get() else False
-    # 默认值
-    style.paragraph_format.left_indent = Pt(0) # 左缩进
-    style.paragraph_format.right_indent = Pt(0) # 右缩进
-    style.paragraph_format.space_before = Pt(0) # 段前间距
-    style.paragraph_format.space_after = Pt(0)  # 段后间距
-    style.paragraph_format.keep_together = False # 避免段落被拆分到下一页
-    style.paragraph_format.keep_with_next = False # 段落和下一段保持同一页
-    style.paragraph_format.page_break_before = False # 段落应显示在页面顶部
-    style.paragraph_format.tab_stops.clear_all() # 清除所有制表位
+    try:
+        行距方式 = cfg_paragraph.行距方式.get()
+        行距 = cfg_paragraph.行距.get()
+    except:
+        pass
+    try:
+        # 对齐到网络
+        add_xml(style.paragraph_format.element.pPr, 'w:snapToGrid', str(cfg_paragraph.对齐网络.get()))
+        # 右对齐网络
+        add_xml(style.paragraph_format.element.pPr, 'w:adjustRightInd', str(cfg_paragraph.右对齐网络.get()))
+        # 行距/行高
+        if 行距方式 == "倍率":
+            if 行距 == 1.5:
+                style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.ONE_POINT_FIVE
+            elif 行距 == 2:
+                style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.DOUBLE
+            elif 行距 == 1:
+                style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.AT_LEAST
+            elif 行距 == 0:
+                style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.SINGLE
+            else:
+                style.paragraph_format.line_spacing = 行距
+                style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.MULTIPLE
+        elif 行距方式 == "固定":
+            style.paragraph_format.line_spacing = Pt(行距)
+            style.paragraph_format.line_spacing_rule = WD_LINE_SPACING.EXACTLY
+    except:
+        pass
+    try:
+        # 孤行控制
+        style.paragraph_format.widow_control = True if cfg_paragraph.孤行控制.get() else False
+        # 默认值
+        style.paragraph_format.left_indent = Pt(0) # 左缩进
+        style.paragraph_format.right_indent = Pt(0) # 右缩进
+        style.paragraph_format.space_before = Pt(0) # 段前间距
+        style.paragraph_format.space_after = Pt(0)  # 段后间距
+        style.paragraph_format.keep_together = False # 避免段落被拆分到下一页
+        style.paragraph_format.keep_with_next = False # 段落和下一段保持同一页
+        style.paragraph_format.page_break_before = False # 段落应显示在页面顶部
+        style.paragraph_format.tab_stops.clear_all() # 清除所有制表位
+    except:
+        pass
 
-    # TODO: 修改样式
-    pass
 
 
 def get_abstract_num(abs_list):
@@ -561,6 +593,9 @@ def set_numbering(doc, config:HiddenCleanerConfig):
                                 isLgl = lvl.find(qn("w:isLgl"))
                                 if isLgl:
                                     isLgl.getparent().remove(isLgl)
+                            # 字体：删除字体，编号字体与正文字体保持一致
+                            rPr = lvl.find(qn("w:rPr"))
+                            rPr.getparent().remove(rPr)
                             # 缩进
                             pPr = lvl.find(qn("w:pPr"))
                             tabs = pPr.find(qn("w:tabs"))
@@ -763,6 +798,7 @@ def set_docx_one(config:HiddenCleanerConfig, file, process=None, count=None, tip
     # 样式
     for style in doc.styles:
         set_style(style, config)
+
     # 标题编号
     have_numbering = set_numbering(doc, config)
     # 封面或目录
